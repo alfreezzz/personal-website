@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'DeterminationMono';
+    src: url('/fonts/DeterminationMonoWebRegular-Z5oq.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DeterminationSans';
+    src: url('/fonts/DeterminationSansWebRegular-369X.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
