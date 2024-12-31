@@ -1,6 +1,9 @@
 <div id="experience" class="mt-32 lg:px-8 px-5 py-3 xl:mx-32 mx-5 border border-[#C7EEFF] rounded-lg shadow-lg shadow-[#C7EEFF]">
     <x-header>Experiences</x-header>
     <x-button><a href="{{ url('experience/create') }}">New experience</a></x-button>
+    @if($experiences->isEmpty())
+        <p class="text-center text-gray-400 my-16">Experience has not yet been added.</p>
+    @else
     <div class="space-y-16 lg:mt-12 mt-8 mb-4 lg:mb-8">
 
         @foreach($experiences as $experience)
@@ -30,4 +33,5 @@
         </div>
         @endforeach
     </div>
+    @endif
 </div>

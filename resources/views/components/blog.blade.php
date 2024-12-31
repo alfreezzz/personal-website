@@ -61,6 +61,9 @@
             </div>
         </form>         
     </div>   
+    @if($blogs->isEmpty())
+        <p class="text-center text-gray-400 my-16">Article has not yet been added.</p>
+    @else
     <div class="grid lg:grid-cols-3 sm:grid-cols-2 sm:gap-5 gap-3 max-sm:mt-5 pt-5 mx-auto">
 
         @foreach ($blogs as $blog)
@@ -85,4 +88,5 @@
         @endforeach
 
     </div>
+    @endif
 </div>

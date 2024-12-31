@@ -25,7 +25,7 @@
             white-space: nowrap; /* Tidak membungkus teks */
             border-right: 2px solid #0077C0; /* Kursor ketikan */
             display: inline-block;
-            animation: typing 2.3s steps(12, end) 1, blink 0.5s step-end infinite;
+            animation: typing 2.3s steps(12, end) 1, blink 1s step-end infinite;
         }
     
         @keyframes typing {

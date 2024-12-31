@@ -77,6 +77,9 @@
                 
     </div>           
 
+    @if($projects->isEmpty())
+        <p class="text-center text-gray-400 my-16">Project has not yet been added.</p>
+    @else
     <div class="flex flex-col lg:gap-12 gap-16 mt-5 mx-auto">
 
         @foreach ($projects as $project)
@@ -163,7 +166,8 @@
         </div>
         @endforeach
 
-    </div>    
+    </div>  
+    @endif  
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function () {

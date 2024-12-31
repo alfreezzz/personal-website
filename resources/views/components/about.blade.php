@@ -22,6 +22,9 @@
         <div class="lg:w-[50%] border border-[#C7EEFF] rounded-xl p-5 shadow-[#C7EEFF] shadow-inner">
             <h2 class="text-center text-2xl font-bold text-[#0077C0] tracking-wide -mt-3">-- Skills --</h2>
             <a class="bg-black border border-[#C7EEFF] rounded-xl px-4 py-0.5 text-sm tracking-wider hover:bg-[#C7EEFF] hover:text-black transition" href="{{ url('skill/create') }}">New skill</a>
+            @if($skills->isEmpty())
+                <p class="text-center text-gray-400 my-16 lg:my-28">Skill has not yet been added.</p>
+            @else
             <div class="grid grid-cols-2 mt-4 gap-x-12 gap-y-4">
                 @foreach ($skills as $skill)
                 <div class="">
@@ -45,6 +48,7 @@
                 @endforeach
                 
             </div>
+            @endif
         </div>
     </div>
 </div>
