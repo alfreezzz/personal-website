@@ -23,7 +23,7 @@
         </div>        
     </button>
     <!-- Mobile Navigation -->
-    <div x-show="open" @click.outside="open = false" class="absolute top-16 left-0 w-full bg-black text-sm font-light flex flex-col space-y-4 px-5 py-5 lg:hidden">
+    <div x-show="open" @click.outside="open = false" x-transition.origin.top.duration.300ms class="absolute top-16 left-0 w-full bg-black text-sm font-light flex flex-col space-y-4 px-5 py-5 lg:hidden">
         <a href="{{ url('/') }}#home" class="relative group">Home<span class="absolute left-0 bottom-0 w-0 h-0.5 bg-[#C7EEFF] transition-all duration-300 group-hover:w-full"></span></a>
         <a href="{{ url('/') }}#about" class="relative group">About<span class="absolute left-0 bottom-0 w-0 h-0.5 bg-[#C7EEFF] transition-all duration-300 group-hover:w-full"></span></a>
         <a href="{{ url('/') }}#experience" class="relative group">Experience<span class="absolute left-0 bottom-0 w-0 h-0.5 bg-[#C7EEFF] transition-all duration-300 group-hover:w-full"></span></a>

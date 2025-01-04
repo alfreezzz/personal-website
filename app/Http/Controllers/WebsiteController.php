@@ -43,15 +43,25 @@ class WebsiteController extends Controller
 
     public function send()
     {
-        $data = request()->validate([
-            'name' => 'required|min:3',
-            'email' => 'required|email',
-            'message' => 'required|min:5',
-        ]);
+        $data = request()->validate(
+            [
+                'name' => 'required|min:3',
+                'email' => 'required|email',
+                'message' => 'required|min:5',
+            ],
+            [
+                'name.required' => 'Name is required',
+                'name.min' => 'Name must be at least 3 characters',
+                'email.required' => 'Email is required',
+                'email.email' => 'Email is invalid',
+                'message.required' => 'Message is required',
+                'message.min' => 'Message must be at least 5 characters',
+            ]
+        );
         Mail::to('roshinante678@gmail.com')->send(new ContactUs($data));
 
         Message::create($data);
 
-        return redirect()->back()->with('success', 'Message sent successfully');
+        return redirect('/#contact')->with('success', 'Message sent successfully');
     }
 }

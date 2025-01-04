@@ -20,7 +20,7 @@
         </div>              
         
         <div class="lg:w-[50%] border border-[#C7EEFF] rounded-xl p-5 shadow-[#C7EEFF] shadow-inner">
-            <h2 class="text-center text-2xl font-bold text-[#0077C0] tracking-wide -mt-3">-- Skills --</h2>
+            <h2 class="text-center text-2xl font-bold bg-gradient-to-b from-[#0077C0] via-[#0077C0] to-[#C7EEFF] bg-clip-text text-transparent tracking-wide -mt-3">-- Skills --</h2>
             <a class="bg-black border border-[#C7EEFF] rounded-xl px-4 py-0.5 text-sm tracking-wider hover:bg-[#C7EEFF] hover:text-black transition" href="{{ url('skill/create') }}">New skill</a>
             @if($skills->isEmpty())
                 <p class="text-center text-gray-400 my-16 lg:my-28">Skill has not yet been added.</p>

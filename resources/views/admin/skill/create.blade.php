@@ -2,7 +2,7 @@
 
     <div class="mt-36 xl:px-32 px-5 items-center">
         <div class="w-full border border-[#C7EEFF] rounded-xl p-5 shadow-[#C7EEFF] shadow-inner">
-            <h2 class="text-center text-2xl font-bold text-[#0077C0] tracking-wide max-lg:mb-12">-- {{ $title }} --</h2>
+            <h2 class="text-center text-2xl font-bold bg-gradient-to-b from-[#0077C0] via-[#0077C0] to-[#C7EEFF] bg-clip-text text-transparent tracking-wide max-lg:mb-12">-- {{ $title }} --</h2>
 
             <form action="{{ url('skill') }}" method="POST" enctype="multipart/form-data">
                 @csrf

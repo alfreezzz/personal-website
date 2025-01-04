@@ -88,7 +88,7 @@
                 <a href="{{ $project->url ?? "#" }}" class="lg:w-1/3 w-full" target="_blank">
                     <img src="{{ Storage::exists('public/' . $project->img) ? asset('storage/' . $project->img) : 'https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=' }}" 
                          alt="Project" 
-                         class="object-cover w-full h-52 rounded-lg hover:border-2 hover:border-[#0077C0] transition duration-200">
+                         class="object-cover w-full lg:h-52 h-64 sm:h-80 rounded-lg hover:border-2 hover:border-[#0077C0] transition duration-200">
                 </a>
                 
                 <div class="lg:w-2/3 w-full lg:ml-6">

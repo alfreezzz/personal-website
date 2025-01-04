@@ -2,29 +2,34 @@
     <x-header>Get in touch</x-header>
     <div class="flex max-lg:flex-col items-center gap-16 lg:mt-10 mt-5">
         <div class="border border-[#C7EEFF] rounded-xl lg:p-6 sm:p-9 p-6 lg:w-[50%] w-full shadow-behind shadow-gray">
+            @if(session('success'))
+                <div class="bg-green-500 text-[#C7EEFF] text-center p-4 rounded mb-4">
+                    {{ session('success') }}
+                </div>
+            @endif
             <form action="{{ route('welcome.send') }}" method="POST" class="flex flex-col gap-3 lg:gap-1">
                 @csrf
                 <div class="mb-4">
                     <label for="name" class="font-medium block mb-1">Name</label>
                     <input type="text" id="name" name="name" placeholder="Phantom thieves" class="border border-[#c7eeff2f] bg-black w-full rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[#0077C0]">
+                    @error('name')
+                        <span>{{ $message }}</span>
+                    @enderror
                 </div>
-                @error('name')
-                    <span>{{ $message }}</span>
-                @enderror
                 <div class="mb-4">
                     <label for="email" class="font-medium block mb-1">Email</label>
                     <input type="email" id="email" name="email" placeholder="patientmonitor@example.com" class="border border-[#c7eeff2f] bg-black w-full rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[#0077C0]">
+                    @error('email')
+                        <span>{{ $message }}</span>
+                    @enderror
                 </div>
-                @error('email')
-                    <span>{{ $message }}</span>
-                @enderror
                 <div class="mb-4">
                     <label for="message" class="font-medium block mb-1">Message</label>
                     <textarea id="message" name="message" placeholder="I am thou, and thou art I..." class="border border-[#c7eeff2f] bg-black w-full rounded-md px-2 py-1 resize-none h-32 focus:outline-none focus:ring-2 focus:ring-[#0077C0]"></textarea>
+                    @error('message')
+                        <span>{{ $message }}</span>
+                    @enderror
                 </div>
-                @error('message')
-                    <span>{{ $message }}</span>
-                @enderror
                 <button type="submit"
                     class="relative inline-flex h-12 active:scale-95 transistion overflow-hidden rounded-lg p-[1px] focus:outline-none"
                     >
