@@ -15,7 +15,7 @@ class WebsiteController extends Controller
 {
     public function index(Request $request)
     {
-        $skills = Skill::paginate(6);
+        $skills = Skill::all();
         $experiences = Experience::all();
         $projectcategories = Portofolio::select('jenis_apk')->distinct()->get();
 
