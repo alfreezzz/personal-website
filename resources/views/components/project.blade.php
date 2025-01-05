@@ -169,27 +169,3 @@
     </div>  
     @endif  
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const readMoreLinks = document.querySelectorAll('.read-more');
-
-        readMoreLinks.forEach(link => {
-            link.addEventListener('click', function () {
-                const projectId = this.getAttribute('data-id');
-                const shortDescription = document.querySelector(`#project-description-${projectId} .short-description`);
-                const fullDescription = document.querySelector(`#project-description-${projectId} .full-description`);
-
-                // Toggle visibility
-                shortDescription.classList.toggle('hidden');
-                fullDescription.classList.toggle('hidden');
-
-                // Ubah teks Read More ke Read Less
-                if (fullDescription.classList.contains('hidden')) {
-                    this.textContent = 'Read More';
-                } else {
-                    this.textContent = 'Read Less';
-                }
-            });
-        });
-    });
-</script>
