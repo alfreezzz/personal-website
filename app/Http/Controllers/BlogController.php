@@ -65,7 +65,7 @@ class BlogController extends Controller
 
         $blog->save();
 
-        return redirect('/#blog')->with('success', 'Article created successfully');
+        return redirect('?token=' . $request->input('token') . '#blog')->with('success', 'Article created successfully');
     }
 
     /**
@@ -150,15 +150,15 @@ class BlogController extends Controller
 
         $blog->save();
 
-        return redirect('/#blog')->with('success', 'Article updated successfully');
+        return redirect('blog/' . $slug . '?token=' . $request->input('token'))->with('success', 'Article updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id, Request $request)
     {
         Blog::destroy($id);
-        return redirect('/#blog')->with('success', 'Blog deleted successfully');
+        return redirect('?token=' . $request->input('token') . '#blog')->with('success', 'Blog deleted successfully');
     }
 }

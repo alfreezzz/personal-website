@@ -56,68 +56,79 @@
         <div class="sm:w-3/5 w-full">
             <div class="flex justify-between mb-3">
                 <h1 class="text-left lg:text-4xl text-3xl font-bold tracking-wide bg-gradient-to-b from-[#0077C0] via-[#0077C0] to-[#C7EEFF] bg-clip-text text-transparent">-- Me! --</h1>
-                <x-btn-add href="{{ url('skill/create') }}">skill</x-btn-add>
+                @if(request()->query('token') === env('ADMIN_ACCESS_TOKEN'))
+                    <x-btn-add href="{{ url('skill/create') . '?' . http_build_query(['token' => request()->query('token')]) }}">skill</x-btn-add>
+                @endif
             </div>
             <div class="indent-8 leading-relaxed tracking-wide lg:text-base text-sm">
                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur et in, fugit minima, aspernatur deleniti possimus nisi, ex autem tempora quibusdam quaerat! Voluptatum tenetur dicta expedita, iusto modi eos ad.</p>
                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur et in, fugit minima, aspernatur deleniti possimus nisi, ex autem tempora quibusdam quaerat! Voluptatum tenetur dicta expedita, iusto modi eos ad.</p>
             </div>
             <div class="flex lg:gap-2 sm:gap-1.5 gap-1 flex-wrap lg:mt-4 mt-2">
-                @foreach ($skills as $skill)
-                    <div x-data="{ open: false }" class="relative inline-block">
-                        <!-- Skill Button -->
-                        <button @click="open = !open" class="px-3 rounded text-center lg:text-base text-sm filter hover:brightness-75 transition"
-                            style="background-color: #{{ $skill->warna }}; color: {{ hexdec($skill->warna) > 0x888888 ? '#000' : '#FFF' }}">
-                            {{ $skill->bahasa }}
-                        </button>
-
-                        <!-- Dropdown Menu -->
-                        <div 
-                            x-show="open" 
-                            x-transition:enter="transition ease-out duration-300"
-                            x-transition:enter-start="opacity-0 scale-90"
-                            x-transition:enter-end="opacity-100 scale-100"
-                            x-transition:leave="transition ease-in duration-200"
-                            x-transition:leave-start="opacity-100 scale-100"
-                            x-transition:leave-end="opacity-0 scale-90"
-                            @click.away="open = false"
-                            class="absolute right-0 z-20 mt-2 w-32 origin-top-right"
-                        >
-                            <div class="bg-white divide-y divide-gray-100 rounded-lg shadow-lg ring-1 ring-black/5 border border-gray-100">
-                                <div class="px-1 py-1">
-                                    <a 
-                                        href="{{ route('skill.edit', $skill->id) }}" 
-                                        class="group flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-gray-400 group-hover:text-blue-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                        </svg>
-                                        Edit
-                                    </a>
-                                </div>
-                                <div class="px-1 py-1">
-                                    <form 
-                                        action="{{ route('skill.destroy', $skill->id) }}" 
-                                        method="POST" 
-                                        onsubmit="return confirm('Are u sure?')"
-                                    >
-                                        @csrf
-                                        @method('DELETE')
-                                        <button 
-                                            type="submit" 
-                                            class="group flex w-full items-center rounded-md px-3 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors duration-200"
-                                        >
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-red-400 group-hover:text-red-600 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                            </svg>
-                                            Delete
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                @if($skills->isEmpty())
+                    <div class="flex items-center mobile-m:space-x-5 space-y-2 flex-wrap">
+                        <p class="text-center text-gray-400 text-sm sm:text-base font-light">Skill has not yet been added.</p>
+                        <x-cta-btn href="{{ url('skill/create') . '?' . http_build_query(['token' => request()->query('token')]) }}">Add a skill</x-cta-btn>
                     </div>
-                @endforeach
+                @else
+                    @foreach ($skills as $skill)
+                        <div x-data="{ open: false }" class="relative inline-block">
+                            <!-- Skill Button -->
+                            <button @click="open = !open" class="px-3 rounded text-center lg:text-base text-sm filter hover:brightness-75 transition"
+                                style="background-color: #{{ $skill->warna }}; color: {{ hexdec($skill->warna) > 0x888888 ? '#000' : '#FFF' }}">
+                                {{ $skill->bahasa }}
+                            </button>
+
+                            @if(request()->query('token') === env('ADMIN_ACCESS_TOKEN'))
+                                <!-- Dropdown Menu -->
+                                <div 
+                                    x-show="open" 
+                                    x-transition:enter="transition ease-out duration-300"
+                                    x-transition:enter-start="opacity-0 scale-90"
+                                    x-transition:enter-end="opacity-100 scale-100"
+                                    x-transition:leave="transition ease-in duration-200"
+                                    x-transition:leave-start="opacity-100 scale-100"
+                                    x-transition:leave-end="opacity-0 scale-90"
+                                    @click.away="open = false"
+                                    class="absolute right-0 z-20 mt-2 w-32 origin-top-right"
+                                >
+                                    <div class="bg-white divide-y divide-gray-100 rounded-lg shadow-lg ring-1 ring-black/5 border border-gray-100">
+                                        <div class="px-1 py-1">
+                                            <a 
+                                                href="{{ route('skill.edit', ['skill' => $skill->id, 'token' => request()->query('token')]) }}"
+                                                class="group flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-gray-400 group-hover:text-blue-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                </svg>
+                                                Edit
+                                            </a>
+                                        </div>
+                                        <div class="px-1 py-1">
+                                            <form 
+                                                action="{{ route('skill.destroy', ['skill' => $skill->id, 'token' => request()->query('token')]) }}" 
+                                                method="POST" 
+                                                onsubmit="return confirm('Are u sure?')"
+                                            >
+                                                @csrf
+                                                @method('DELETE')
+                                                <button 
+                                                    type="submit" 
+                                                    class="group flex w-full items-center rounded-md px-3 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors duration-200"
+                                                >
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-red-400 group-hover:text-red-600 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    </svg>
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>

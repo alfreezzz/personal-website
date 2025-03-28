@@ -4,9 +4,11 @@
 
         <div class="flex flex-col lg:gap-12 gap-16 mt-5 mx-auto">
 
-            <form action="{{ route('portofolio.update', $projects->id) }}" method="POST" enctype="multipart/form-data" class="">
+            <form action="{{ route('portofolio.update', ['portofolio' => $projects->id, 'token' => request()->query('token')]) }}" method="POST" enctype="multipart/form-data" class="">
                 @csrf
                 @method('PUT')
+                <input type="hidden" name="token" value="{{ request()->query('token') }}">
+
                 <div class="flex max-lg:flex-col justify-between items-start mb-5">
                     <div href="#" class="lg:w-1/3 w-full">
                         <div class="relative">

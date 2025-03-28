@@ -67,7 +67,7 @@ class PortofolioController extends Controller
 
         $portofolio->save();
 
-        return redirect('/#project')->with('success', 'Project added successfully');
+        return redirect('?token=' . $request->input('token') . '#project')->with('success', 'Project added successfully');
     }
 
     /**
@@ -122,15 +122,15 @@ class PortofolioController extends Controller
             'bahasa' => json_encode($request->bahasa), // Pastikan ini adalah format JSON
         ]);
 
-        return redirect('/#project')->with('success', 'Project updated successfully.');
+        return redirect('?token=' . $request->input('token') . '#project')->with('success', 'Project updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id, Request $request)
     {
         Portofolio::destroy($id);
-        return redirect('/#project')->with('success', 'Project removed successfully');
+        return redirect('?token=' . $request->input('token') . '#project')->with('success', 'Project removed successfully');
     }
 }

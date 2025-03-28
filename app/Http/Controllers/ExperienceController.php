@@ -54,7 +54,7 @@ class ExperienceController extends Controller
 
         $experience->save();
 
-        return redirect('/#experience')->with('success', 'Experience added successfully');
+        return redirect('?token=' . $request->input('token') . '#experience')->with('success', 'Experience added successfully');
     }
 
     /**
@@ -105,15 +105,15 @@ class ExperienceController extends Controller
 
         $experience->save();
 
-        return redirect('/#experience')->with('success', 'Experience updated successfully');
+        return redirect('?token=' . $request->input('token') . '#experience')->with('success', 'Experience updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id, Request $request)
     {
         Experience::destroy($id);
-        return redirect('/#experience')->with('success', 'Experience deleted successfully');
+        return redirect('?token=' . $request->input('token') . '#experience')->with('success', 'Experience deleted successfully');
     }
 }

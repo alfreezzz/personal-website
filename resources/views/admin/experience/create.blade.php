@@ -2,8 +2,10 @@
     <div class="mt-28 lg:px-8 px-3 sm:mx-5 py-3 xl:mx-32 mx-3 border border-[#C7EEFF] rounded-lg shadow-lg shadow-[#C7EEFF]">
         <x-header>{{ $title }}</x-header>
         <div class="lg:mt-12 mt-8 mb-4 lg:mb-8">
-            <form action="{{ url('experience') }}" method="POST" enctype="multipart/form-data" class="flex">
+            <form action="{{ route('experience.store', ['token' => request()->query('token')]) }}" method="POST" enctype="multipart/form-data" class="flex">
                 @csrf
+                <input type="hidden" name="token" value="{{ request()->query('token') }}">
+
                 <div class="flex">
                     <div class="lg:w-36 w-16 space-y-2"><input type="text" name="thn_mulai" placeholder="YYYY Month" class="border border-[#c7eeff2f] bg-black lg:w-32 w-16 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[#0077C0]"> - 
                         @error('thn_mulai')

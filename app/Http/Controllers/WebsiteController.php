@@ -41,7 +41,7 @@ class WebsiteController extends Controller
         return view('welcome', compact('skills', 'experiences', 'projects', 'projectcategories', 'blogs', 'blogcategories'));
     }
 
-    public function send()
+    public function send(Request $request)
     {
         $data = request()->validate(
             [
@@ -62,6 +62,6 @@ class WebsiteController extends Controller
 
         Message::create($data);
 
-        return redirect('/#contact')->with('success', 'Message sent successfully');
+        return redirect('?token=' . $request->input('token') . '#contact')->with('success', 'Message sent successfully');
     }
 }

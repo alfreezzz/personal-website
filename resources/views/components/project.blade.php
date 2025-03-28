@@ -5,7 +5,9 @@
         <span class="font-semibold">made</span>.
     </x-sub-header>
     <div class="justify-between flex my-5">
-        <x-btn-add href="{{ url('portofolio/create') }}">project</x-btn-add>
+        @if(request()->query('token') === env('ADMIN_ACCESS_TOKEN'))
+            <x-btn-add href="{{ url('portofolio/create') . '?' . http_build_query(['token' => request()->query('token')]) }}">project</x-btn-add>
+        @endif
 
         <form action="{{ url('#project') }}" method="GET" class="flex items-center" id="filterForm">
             <div class="relative" x-data="{ isOpen: false }">
@@ -46,14 +48,14 @@
                 >
                     <div class="py-1" role="none">
                         <a
-                            href="{{ url('/') }}#project" 
+                            href="{{ url('/') . '?' . http_build_query(['token' => request()->query('token')]) }}#project" 
                             class="block lg:px-4 px-3 py-1 lg:text-base text-sm text-[#C7EEFF] hover:bg-gray-900 hover:text-gray-100"
                         >
                             All app
                         </a>
                         @foreach($projectcategories as $projectcategory)
                             <a
-                                href="?jenis_apk={{ $projectcategory->jenis_apk }}#project"
+                                href="{{ url()->current() . '?' . http_build_query(array_merge(request()->query(), ['jenis_apk' => $projectcategory->jenis_apk])) }}#project"
                                 class="block lg:px-4 px-3 py-1 text-sm text-[#C7EEFF] hover:bg-gray-900 hover:text-gray-100"
                             >
                                 {{ $projectcategory->jenis_apk }}
@@ -61,13 +63,13 @@
                         @endforeach
                         <div class="border-t border-[#C7EEFF]"></div>
                         <a
-                            href="?filter=latest#project"
+                            href="{{ url()->current() . '?' . http_build_query(array_merge(request()->query())) . '&filter=latest' }}#project"
                             class="block lg:px-4 px-3 py-1 text-sm text-[#C7EEFF] hover:bg-gray-900 hover:text-gray-100"
                         >
                             Latest
                         </a>
                         <a
-                            href="?filter=oldest#project"
+                            href="{{ url()->current() . '?' . http_build_query(array_merge(request()->query())) . '&filter=oldest' }}#project"
                             class="block lg:px-4 px-3 py-1 text-sm text-[#C7EEFF] hover:bg-gray-900 hover:text-gray-100"
                         >
                             Oldest
@@ -80,7 +82,11 @@
     </div>           
 
     @if($projects->isEmpty())
-        <p class="text-center text-gray-400 my-16">Project has not yet been added.</p>
+        <div class="flex flex-col max-w-screen-mobile-m justify-center items-center mx-auto">
+            <svg class="w-1/5 h-1/5" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#9ca3af"><path d="M320-240 80-480l240-240 57 57-184 184 183 183-56 56Zm320 0-57-57 184-184-183-183 56-56 240 240-240 240Z"/></svg>
+            <p class="text-center text-gray-400 mb-4 mt-2 font-light sm:text-base text-sm">Project has not yet been added.</p>
+            <x-cta-btn href="{{ url('portofolio/create') . '?' . http_build_query(['token' => request()->query('token')]) }}">Add a project</x-cta-btn>
+        </div>
     @else
     <div class="flex flex-col lg:gap-16 gap-20 mt-5 mx-auto">
 
@@ -100,7 +106,7 @@
                         </a>
                         <h3 class="sm:text-lg text-gray-400 text-right">{{ $project->tgl_selesai }}</h3>
                     </div>
-                    <a href="?jenis_apk={{ $project->jenis_apk }}#project" class="px-3 py-1 rounded-xl bg-[#0077C0] lg:text-sm text-xs font-medium hover:bg-[#005a99] transition duration-200">{{ $project->jenis_apk }}</a>
+                    <a href="{{ url()->current() . '?' . http_build_query(array_merge(request()->query(), ['jenis_apk' => $project->jenis_apk])) }}#project" class="px-3 py-1 rounded-xl bg-[#0077C0] lg:text-sm text-xs font-medium hover:bg-[#005a99] transition duration-200">{{ $project->jenis_apk }}</a>
                     <p class="mt-5 text-gray-300" id="project-description-{{ $project->id }}">
                         <span class="short-description">
                             {!! Str::limit(strip_tags($project->deskripsi), 125) !!}
@@ -162,10 +168,12 @@
                     </div>
                 </div>
             </div>
-            <div class="flex sm:gap-4 gap-3 mt-5">
-                <x-btn-edit href="{{ route('portofolio.edit', $project->id) }}"></x-btn-edit>
-                <x-btn-delete action="{{ url('portofolio/'.$project->id)}}"></x-btn-delete>
-            </div>
+            @if(request()->query('token') === env('ADMIN_ACCESS_TOKEN'))
+                <div class="flex sm:gap-4 gap-3 mt-5">
+                    <x-btn-edit href="{{ route('portofolio.edit', ['portofolio' => $project->id, 'token' => request()->query('token')]) }}"></x-btn-edit>
+                    <x-btn-delete action="{{ url('portofolio/'.$project->id). '?' . http_build_query(['token' => request()->query('token')])}}"></x-btn-delete>
+                </div>
+            @endif
         </div>
         @endforeach
 

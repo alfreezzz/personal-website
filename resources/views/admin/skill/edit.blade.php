@@ -4,9 +4,11 @@
         <div class="w-full border border-[#C7EEFF] rounded-xl p-5 shadow-[#C7EEFF] shadow-inner">
             <h2 class="text-center sm:text-2xl text-xl font-bold bg-gradient-to-b from-[#0077C0] via-[#0077C0] to-[#C7EEFF] bg-clip-text text-transparent tracking-wide max-lg:mb-12">-- {{ $title }} --</h2>
 
-            <form action="{{ url('skill/' . $skill->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('skill.update', ['skill' => $skill->id, 'token' => request()->query('token')]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
+                <input type="hidden" name="token" value="{{ request()->query('token') }}">
+
                 <div class="flex justify-between">
                     <div class="mb-4 flex flex-col">
                         <input type="text" name="bahasa" value="{{ old('bahasa', $skill->bahasa) }}" placeholder="Programming language" class="border border-[#c7eeff2f] bg-black w-full rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[#0077C0]">

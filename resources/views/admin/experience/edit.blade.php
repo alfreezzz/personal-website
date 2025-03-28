@@ -2,9 +2,11 @@
     <div class="mt-36 lg:px-8 px-3 py-3 sm:mx-5 xl:mx-32 mx-3 border border-[#C7EEFF] rounded-lg shadow-lg shadow-[#C7EEFF]">
         <x-header>{{ $title }}</x-header>
         <div class="lg:mt-12 mt-8 mb-4 lg:mb-8">
-            <form action="{{ route('experience.update', $experience->id) }}" method="POST" enctype="multipart/form-data" class="flex">
+            <form action="{{ route('experience.update', ['experience' => $experience->id, 'token' => request()->query('token')]) }}" method="POST" enctype="multipart/form-data" class="flex">
                 @csrf
                 @method('PUT')
+                <input type="hidden" name="token" value="{{ request()->query('token') }}">
+
                 <div class="flex">
                     <div class="lg:w-36 w-16 space-y-2">
                         <input type="text" name="thn_mulai" value="{{ $experience->thn_mulai }}" placeholder="YYYY Month" class="border border-[#c7eeff2f] bg-black lg:w-32 w-16 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[#0077C0]"> -

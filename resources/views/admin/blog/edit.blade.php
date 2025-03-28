@@ -1,9 +1,11 @@
 <x-layout-2 :title="$title">
     <div id="blog" class="xl:px-32 px-3 sm:px-5 mt-28">
         <x-header>{{ $title }}</x-header>
-        <form action="{{ url('blog/' . $blog->slug) }}" method="POST" enctype="multipart/form-data" class="grow-2 shrink basis-full lg:pr-5">
+        <form action="{{ route('blog.update', ['slug' => $blog->slug, 'token' => request()->query('token')]) }}" method="POST" enctype="multipart/form-data" class="grow-2 shrink basis-full lg:pr-5">
             @csrf
             @method('PUT') <!-- Use PUT method for update -->
+            <input type="hidden" name="token" value="{{ request()->query('token') }}">
+
             <div class="leading-relaxed">
                 <input type="text" name="judul_artikel" value="{{ $blog->judul_artikel }}" placeholder="Title" class="mb-5 mt-3 border border-[#c7eeff2f] bg-black w-full rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[#0077C0]">
                 @error('judul_artikel')

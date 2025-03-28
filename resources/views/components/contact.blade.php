@@ -59,6 +59,7 @@
                 method="POST"
             >
                 @csrf
+                <input type="hidden" name="token" value="{{ request()->query('token') }}">
                 <div class="mb-4">
                     <label for="name" class="font-medium block mb-1">Name</label>
                     <input 
@@ -204,11 +205,13 @@
                     </a>
                 </div>
             </div>
-            <a href="{{ route('admin.messages.index') }}"
-                class="inline-flex shadow-2xl hover:shadow-white drop-shadow-[0_1px_2px_rgb(0,119,192)] hover:-translate-y-0.5 hover:scale-105 hover:brightness-150 font-semibold focus:scale-95 bg-[#0077C0] border-2 border-[#0076c0] items-center justify-center rounded-lg sm:px-4 px-3 py-1.5 transition">
-                    <span class="sm:text-base text-sm text-[#09293d]">View messages</span>
-                    <svg  class="w-5 h-5 lg:w-6 lg:h-6 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#09293d"><path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/></svg>
-            </a>
+            @if(request()->query('token') === env('ADMIN_ACCESS_TOKEN'))
+                <a href="{{ route('admin.messages.index', ['token' => request()->query('token')]) }}"
+                    class="inline-flex shadow-2xl hover:shadow-white drop-shadow-[0_1px_2px_rgb(0,119,192)] hover:-translate-y-0.5 hover:scale-105 hover:brightness-150 font-semibold focus:scale-95 bg-[#0077C0] border-2 border-[#0076c0] items-center justify-center rounded-lg sm:px-4 px-3 py-1.5 transition">
+                        <span class="sm:text-base text-sm text-[#09293d]">View messages</span>
+                        <svg  class="w-5 h-5 lg:w-6 lg:h-6 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#09293d"><path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/></svg>
+                </a>
+            @endif
         </div>
     </div>
 </div>

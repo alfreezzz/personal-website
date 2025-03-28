@@ -4,8 +4,10 @@
 
         <div class="flex flex-col lg:gap-12 gap-16 mt-5 mx-auto">
 
-            <form action="{{ url('portofolio') }}" method="POST" enctype="multipart/form-data" class="">
+            <form action="{{ route('portofolio.store', ['token' => request()->query('token')]) }}" method="POST" enctype="multipart/form-data" class="">
                 @csrf
+                <input type="hidden" name="token" value="{{ request()->query('token') }}">
+
                 <div class="flex max-lg:flex-col justify-between items-start mb-5">
                     <div href="#" class="lg:w-1/3 w-full">
                         <div class="relative">

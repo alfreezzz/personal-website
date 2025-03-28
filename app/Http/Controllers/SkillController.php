@@ -51,7 +51,7 @@ class SkillController extends Controller
         $skill->persen = $request->persen;
         $skill->save();
 
-        return redirect('/#about')->with('success', 'Skill added successfully');
+        return redirect('?token=' . $request->input('token') . '#about')->with('success', 'Skill added successfully');
     }
 
     /**
@@ -98,15 +98,15 @@ class SkillController extends Controller
         $skill->persen = $request->persen;
         $skill->save();
 
-        return redirect('/#about')->with('success', 'Skill updated successfully');
+        return redirect('?token=' . $request->input('token') . '#about')->with('success', 'Skill updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id, Request $request)
     {
         Skill::destroy($id);
-        return redirect('/#about')->with('success', 'Skill deleted successfully');
+        return redirect('?token=' . $request->input('token') . '#about')->with('success', 'Skill deleted successfully');
     }
 }
