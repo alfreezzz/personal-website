@@ -1,6 +1,9 @@
 <div id="blog" class="scroll-section mt-32 xl:px-32 px-3 sm:px-5">
     <x-header>Blog</x-header>
-    <x-sub-header></x-sub-header>
+    <x-sub-header>Some random 
+        <span class="font-medium">thoughts</span> and 
+        <span class="font-medium">ideas</span>.
+    </x-sub-header>
     <div class="justify-between flex">
         @if(request()->query('token') === env('ADMIN_ACCESS_TOKEN'))
             <x-btn-add href="{{ url('admin/blog/create') . '?' . http_build_query(['token' => request()->query('token')]) }}">article</x-btn-add>

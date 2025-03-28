@@ -1,8 +1,14 @@
 <div id="experience" class="scroll-section mt-32 lg:px-8 sm:px-5 px-3 pt-3 pb-6 xl:mx-32 mx-5 border border-[#C7EEFF] rounded-lg shadow-lg shadow-[#C7EEFF] relative">
     <x-header>Experience</x-header>
-    <x-sub-header></x-sub-header>
+    <x-sub-header>
+        <span class="font-medium">Internships</span>, 
+        <span class="font-medium">freelance work</span>, and 
+        <span class="font-medium">personal projects</span>.
+    </x-sub-header>
     @if(request()->query('token') === env('ADMIN_ACCESS_TOKEN'))
-        <x-btn-add href="{{ url('experience/create') . '?' . http_build_query(['token' => request()->query('token')]) }}">experience</x-btn-add>
+        <div class="flex justify-end">
+            <x-btn-add href="{{ url('experience/create') . '?' . http_build_query(['token' => request()->query('token')]) }}">experience</x-btn-add>
+        </div>
     @endif
     <div class="timeline-line absolute left-4 sm:left-32 lg:left-44 w-px top-24 sm:top-20 lg:top-32 bottom-9 lg:bottom-10 bg-[#C7EEFF]"></div>
     <div id="timeline-circle" class="absolute sm:w-5 sm:h-5 w-4 h-4 bg-[#0077C0] top-24 sm:top-20 lg:top-32 rounded-full left-4 sm:left-32 lg:left-44" style="transform: translateX(-50%); z-index: 2"></div>

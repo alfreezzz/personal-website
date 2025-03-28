@@ -1,5 +1,5 @@
 <div id="about" class="scroll-section lg:mt-36 mt-32 xl:px-32 px-3 sm:px-5">
-    <div class="about relative flex sm:flex-row flex-col lg:gap-0 sm:gap-12 items-center sm:px-8 px-5">
+    <div class="about relative flex sm:flex-row flex-col lg:gap-0 sm:gap-12 items-center lg:px-8 sm:px-5 px-3">
         <!-- Animated Rotating Line Container -->
         <div class="absolute left-5 sm:left-10 mobile-m:left-6 mobile-l:left-8 lg:left-20 xl:left-28 lg:top-40 sm:top-36 top-[9.5rem] mobile-m:top-44 mobile-l:top-48 -translate-y-1/2 lg:w-64 sm:w-56 w-10/12 aspect-square">
             <!-- Rotating SVG Line -->
@@ -60,11 +60,16 @@
                     <x-btn-add href="{{ url('skill/create') . '?' . http_build_query(['token' => request()->query('token')]) }}">skill</x-btn-add>
                 @endif
             </div>
-            <div class="indent-8 leading-relaxed tracking-wide lg:text-base text-sm">
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur et in, fugit minima, aspernatur deleniti possimus nisi, ex autem tempora quibusdam quaerat! Voluptatum tenetur dicta expedita, iusto modi eos ad.</p>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur et in, fugit minima, aspernatur deleniti possimus nisi, ex autem tempora quibusdam quaerat! Voluptatum tenetur dicta expedita, iusto modi eos ad.</p>
+            <div class="tracking-wide font-light leading-relaxed sm:text-sm lg:text-base">
+                <p>Hi, my name is 
+                    <span class="font-medium">Alfriza Akhmad Rahadi</span>, you may call me 
+                    <span class="font-medium">Alfriza</span> or <span class="font-medium">Iza</span>. I grew up in a village located in 
+                    <span class="font-medium">Bogor, Jawa Barat.</span> I am currently studying at 
+                    <a class="font-medium underline" href="https://smkamaliah.sch.id/">Amaliah Ciawi Vocational School</a> with a Software and Game Development Major.
+                </p><br>
+                <p>Since I was young, I have always been passionate about gaming. Playing games made me curious about how they were created, which led me to explore programming. I started learning basic coding, and over time, I became more interested in web development.</p>
             </div>
-            <div class="flex lg:gap-2 sm:gap-1.5 gap-1 flex-wrap lg:mt-4 mt-2">
+            <div class="flex lg:gap-2 sm:gap-1.5 gap-1 flex-wrap lg:mt-3 mt-2">
                 @if($skills->isEmpty())
                     <div class="flex items-center mobile-m:space-x-5 space-y-2 flex-wrap">
                         <p class="text-center text-gray-400 text-sm sm:text-base font-light">Skill has not yet been added.</p>
@@ -161,7 +166,7 @@
         </div>
         {{-- Hobbies --}}
         <div class="hobbies w-full border border-[#C7EEFF] sm:aspect-2/1 max-sm:min-h-32 rounded-lg flex flex-col justify-center items-center p-2">
-            <h2 class="lg:text-lg text-xl sm:text-sm font-bold mb-1">My 
+            <h2 class="lg:text-lg text-xl sm:text-sm font-bold mb-1"> 
                 <div class="relative inline-block px-3 text-white font-bold">
                     <span class="absolute inset-0 -skew-x-12 bg-gradient-to-tr from-red-700 via-red-600 to-red-500"></span>
                     <span class="relative italic">Hobbies</span>
