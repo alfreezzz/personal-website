@@ -1,6 +1,6 @@
 <x-layout>
 
-    <x-home></x-home>
+    <x-hero></x-hero>
     
     <x-about :skills="$skills"></x-about>
 

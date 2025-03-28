@@ -1,0 +1,185 @@
+.typing-loop-animation {
+    overflow: hidden; /* Menyembunyikan teks di luar area */
+    white-space: nowrap; /* Tidak membungkus teks */
+    border-right: 2px solid #0077c0; /* Kursor ketikan */
+    display: inline-block;
+    animation: typing 2.3s steps(12, end) 1, blink 1s step-end infinite;
+}
+
+@keyframes typing {
+    0% {
+        width: 0;
+    } /* Mulai dari kosong */
+    90% {
+        width: 100%;
+    } /* Mengetik hingga selesai */
+    100% {
+        width: 100%;
+    } /* Tetap di akhir selama sisa waktu */
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    } /* Berkedip */
+}
+
+/* From Uiverse.io by qhns3 */
+.container {
+    width: 100%;
+    height: 100%;
+
+    background: #000000;
+    --gap: 5em;
+    --line: 1px;
+    --color: rgba(255, 255, 255, 0.2);
+
+    background-image: linear-gradient(
+            -90deg,
+            transparent calc(var(--gap) - var(--line)),
+            var(--color) calc(var(--gap) - var(--line) + 1px),
+            var(--color) var(--gap)
+        ),
+        linear-gradient(
+            0deg,
+            transparent calc(var(--gap) - var(--line)),
+            var(--color) calc(var(--gap) - var(--line) + 1px),
+            var(--color) var(--gap)
+        );
+    background-size: var(--gap) var(--gap);
+}
+/* From Uiverse.io by jeremyssocial */
+.cv {
+    /* Basic dimensions and centering */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Dark mode colors and gradient */
+    background: #121212; /* Fallback for browsers that don't support gradients */
+    background: linear-gradient(
+        135deg,
+        #121212 25%,
+        #1a1a1a 25%,
+        #1a1a1a 50%,
+        #121212 50%,
+        #121212 75%,
+        #1a1a1a 75%,
+        #1a1a1a
+    );
+    background-size: 40px 40px;
+
+    /* Animation */
+    animation: move 4s linear infinite;
+}
+
+@keyframes move {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 40px 40px;
+    }
+}
+
+.hobbies {
+    --s: 23px; /* control the size*/
+    --c1: #000000;
+    --c2: #131111;
+
+    --c: var(--c2) 20% 30%;
+    background: linear-gradient(135deg, #0000 20%, var(--c), #0000 0),
+        repeating-linear-gradient(45deg, var(--c), var(--c1) 0 70%);
+    background-size: var(--s) var(--s);
+}
+
+.scroll-section {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.scroll-section.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Gaya dasar untuk hero section */
+#hero {
+    opacity: 0;
+    transform: translateY(0);
+    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Kelas untuk memicu animasi saat masuk viewport */
+#hero.hero-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Tambahan animasi bertahap untuk elemen dalam hero */
+#hero h3 {
+    position: relative;
+    color: black;
+    z-index: 1;
+}
+
+#hero h3::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: #0077c0;
+    border-radius: 4px;
+    z-index: -1;
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1) 1.3s;
+}
+
+#hero.hero-visible h3::before {
+    width: 100%;
+}
+
+/* Gaya dasar untuk h3 */
+#hero h3 {
+    transform: translateY(20px);
+    transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1) 1.3s,
+        transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+}
+
+#hero.hero-visible h3 {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#hero h1 {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+}
+
+#hero p {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.6s,
+        transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.6s;
+}
+
+#hero .button-container {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.8s,
+        transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.8s;
+}
+
+#hero.hero-visible h3,
+#hero.hero-visible h1,
+#hero.hero-visible p,
+#hero.hero-visible .button-container {
+    opacity: 1;
+    transform: translateY(0);
+}

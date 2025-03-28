@@ -1,20 +1,20 @@
 <x-layout-2 :title="$title">
 
-    <div class="mt-36 xl:px-32 px-5 items-center">
+    <div class="mt-36 xl:px-32 px-3 sm:px-5 items-center">
         <div class="w-full border border-[#C7EEFF] rounded-xl p-5 shadow-[#C7EEFF] shadow-inner">
-            <h2 class="text-center text-2xl font-bold bg-gradient-to-b from-[#0077C0] via-[#0077C0] to-[#C7EEFF] bg-clip-text text-transparent tracking-wide max-lg:mb-12">-- {{ $title }} --</h2>
+            <h2 class="text-center sm:text-2xl tet-xl font-bold bg-gradient-to-b from-[#0077C0] via-[#0077C0] to-[#C7EEFF] bg-clip-text text-transparent tracking-wide max-lg:mb-12">-- {{ $title }} --</h2>
 
             <form action="{{ url('skill') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="flex justify-between">
                     <div class="mb-4 flex flex-col">
-                        <input type="text" name="bahasa" placeholder="Programming language" class="border border-[#c7eeff2f] bg-black w-64 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[#0077C0]">
+                        <input type="text" name="bahasa" placeholder="Programming language" class="border border-[#c7eeff2f] bg-black w-full rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[#0077C0]">
                         @error('bahasa')
                             <span class="text-sm">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="mb-4 flex flex-col">
-                        <input type="number" name="persen" id="persen" placeholder="Percentage %" class="border border-[#c7eeff2f] bg-black w-32 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[#0077C0]" oninput="updateProgressBar()">
+                        <input type="number" min="1" max="100" name="persen" id="persen" placeholder="Percentage %" class="border border-[#c7eeff2f] bg-black w-full rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[#0077C0]" oninput="updateProgressBar()">
                         @error('persen')
                             <span class="text-sm">{{ $message }}</span>
                         @enderror
@@ -27,7 +27,7 @@
                         <span class="text-sm">{{ $message }}</span>
                     @enderror
                 </div>  
-                <x-button type="submit">Submit</x-button>
+                <x-btn-submit>Submit</x-btn-submit>
             </form>
         </div>
     </div>

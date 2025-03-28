@@ -1,13 +1,17 @@
 <x-layout-2 :title="$title">
-    <div id="blog" class="xl:px-32 px-5 mt-28">
+    <div id="blog" class="xl:px-32 px-3 sm:px-5 mt-28">
         <x-header>{{ $title }}</x-header>
         <form action="{{ url('blog/' . $blog->slug) }}" method="POST" enctype="multipart/form-data" class="grow-2 shrink basis-full lg:pr-5">
             @csrf
             @method('PUT') <!-- Use PUT method for update -->
             <div class="leading-relaxed">
+                <input type="text" name="judul_artikel" value="{{ $blog->judul_artikel }}" placeholder="Title" class="mb-5 mt-3 border border-[#c7eeff2f] bg-black w-full rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[#0077C0]">
+                @error('judul_artikel')
+                    <span class="text-sm">{{ $message }}</span>
+                @enderror
                 <div class="flex justify-between">
                     <div class="relative">
-                        <input type="file" name="img" id="imageInput" onchange="previewImage(event)" class="hidden">
+                        <input type="file" name="img" id="imageInput" accept="image/*" onchange="previewImage(event)" class="hidden">
                         <label for="imageInput" class="border border-[#c7eeff2f] bg-black w-full rounded-md px-2 py-1 text-center cursor-pointer text-white hover:ring-2 hover:ring-[#0077C0]">
                             Input your image
                         </label>
@@ -19,7 +23,7 @@
                         <button
                             type="button"
                             @click="isOpen = !isOpen"
-                            class="flex lg:tracking-widest tracking-wide sm:tracking-wider items-center justify-between w-full lg:px-4 px-3 py-1 lg:text-base text-sm text-[#C7EEFF] bg-black rounded-md shadow ring-2 ring-inset ring-[#C7EEFF] hover:bg-gray-800"
+                            class="flex items-center justify-between w-full lg:px-4 px-3 py-1 lg:text-base text-sm text-[#C7EEFF] bg-black rounded-md shadow ring-2 ring-inset ring-[#C7EEFF] hover:bg-gray-800"
                             id="jenis-apk-menu-button"
                             aria-expanded="true"
                             aria-haspopup="true"
@@ -53,6 +57,12 @@
                             <ul class="py-1" role="listbox">
                                 <li
                                     class="block lg:px-4 px-3 py-1 lg:text-base text-sm text-[#C7EEFF] hover:bg-gray-900 hover:text-gray-100 cursor-pointer"
+                                    @click="selected = 'Personal Blog'; isOpen = false"
+                                >
+                                    Personal Blog
+                                </li>
+                                <li
+                                    class="block lg:px-4 px-3 py-1 lg:text-base text-sm text-[#C7EEFF] hover:bg-gray-900 hover:text-gray-100 cursor-pointer"
                                     @click="selected = 'Technology'; isOpen = false"
                                 >
                                     Technology
@@ -69,6 +79,12 @@
                                 >
                                     Education
                                 </li>
+                                <li
+                                    class="block lg:px-4 px-3 py-1 lg:text-base text-sm text-[#C7EEFF] hover:bg-gray-900 hover:text-gray-100 cursor-pointer"
+                                    @click="selected = 'Hobbies and Interests'; isOpen = false"
+                                >
+                                    Hobbies and Interests
+                                </li>
                             </ul>
                         </div>
                     
@@ -78,10 +94,6 @@
                         @enderror
                     </div>                                       </div>
                 <img src="{{ asset('storage/' . $blog->img) }}" alt="Article image" id="imagePreview" class="w-full max-h-[350px] object-cover lg:mb-5 mb-3 mt-2 rounded-lg">
-                <input type="text" name="judul_artikel" value="{{ $blog->judul_artikel }}" placeholder="Title" class="border border-[#c7eeff2f] bg-black w-full rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[#0077C0]">
-                @error('judul_artikel')
-                    <span class="text-sm">{{ $message }}</span>
-                @enderror
                 <textarea name="isi_artikel" placeholder="Content" class="border border-[#c7eeff2f] bg-black w-full rounded-md px-2 py-1 resize-y mt-3 h-96 focus:outline-none focus:ring-2 focus:ring-[#0077C0]">{{ $blog->isi_artikel }}</textarea>
                 @error('isi_artikel')
                     <span>{{ $message }}</span>
@@ -89,7 +101,7 @@
             </div>
             <div class="mt-7 max-lg:mb-12 flex justify-between w-full">
                 <div class=""></div>
-                <x-button type="submit">Update</x-button>
+                <x-btn-submit>Update</x-btn-submit>
             </div>
         </form>
     </div>     
