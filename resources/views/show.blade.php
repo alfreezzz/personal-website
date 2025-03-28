@@ -30,25 +30,27 @@
                 </a>
             </div>
         </div>
+        @if($relatedArticles->isEmpty())
             
-        <div class="grow shrink lg:basis-[35%] basis-full border-l pl-5">
-            <h3 class="text-2xl mb-7 font-semibold underline">Recent Posts</h3>
-    
-            @foreach ($relatedArticles as $related)
-            <div class="flex mb-5 items-center">
-                <a href="{{ url('blog/' . $related->slug) . '?' . http_build_query(['token' => request()->query('token')]) }}">
-                    <div class="w-20 h-20 rounded overflow-hidden">
-                        <img src="{{ Storage::exists('public/' . $related->img) ? asset('storage/' . $related->img) : 'https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=' }}" alt="Related article image"
-                             class="w-full h-full object-cover hover:border-2 hover:border-[#0077C0] transition duration-200">
+        @else
+            <div class="grow shrink lg:basis-[35%] basis-full border-l pl-5">
+                <h3 class="text-2xl mb-7 font-semibold underline">Recent Posts</h3>
+        
+                @foreach ($relatedArticles as $related)
+                <div class="flex mb-5 items-center">
+                    <a href="{{ url('blog/' . $related->slug) . '?' . http_build_query(['token' => request()->query('token')]) }}">
+                        <div class="w-20 h-20 rounded overflow-hidden">
+                            <img src="{{ Storage::exists('public/' . $related->img) ? asset('storage/' . $related->img) : 'https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=' }}" alt="Related article image"
+                                class="w-full h-full object-cover hover:border-2 hover:border-[#0077C0] transition duration-200">
+                        </div>
+                    </a>
+                    <div class="text-left ml-5">
+                        <h4 class="m-0 font-medium tracking-wide leading-[1.3] mb-2 sm:text-base text-xs"><a href="{{ url('blog/' . $related->slug) . '?' . http_build_query(['token' => request()->query('token')]) }}" class="hover:underline">{{ $related->judul_artikel }}</a></h4>
+                        <p class="mr-1 my-0 sm:text-sm text-xs font-light tracking-wider">{{ $related->created_at->diffForHumans() }}</p>
                     </div>
-                </a>
-                <div class="text-left ml-5">
-                    <h4 class="m-0 font-medium tracking-wide leading-[1.3] mb-2 sm:text-base text-xs"><a href="{{ url('blog/' . $related->slug) . '?' . http_build_query(['token' => request()->query('token')]) }}" class="hover:underline">{{ $related->judul_artikel }}</a></h4>
-                    <p class="mr-1 my-0 sm:text-sm text-xs font-light tracking-wider">{{ $related->created_at->diffForHumans() }}</p>
-                </div>
-            </div>        
-            @endforeach     
-    
-        </div>
+                </div>        
+                @endforeach     
+            </div>
+        @endif
     </div>        
 </x-layout-2>
