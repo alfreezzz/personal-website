@@ -5,9 +5,11 @@
         <span class="font-semibold">made</span>.
     </x-sub-header>
     <div class="justify-between flex my-5">
-        @if(request()->query('token') === env('ADMIN_ACCESS_TOKEN'))
-            <x-btn-add href="{{ url('portofolio/create') . '?' . http_build_query(['token' => request()->query('token')]) }}">project</x-btn-add>
-        @endif
+        <div>
+            @if(request()->query('token') === env('ADMIN_ACCESS_TOKEN'))
+                <x-btn-add href="{{ url('portofolio/create') . '?' . http_build_query(['token' => request()->query('token')]) }}">project</x-btn-add>
+            @endif
+        </div>
 
         <form action="{{ url('#project') }}" method="GET" class="flex items-center" id="filterForm">
             <div class="relative" x-data="{ isOpen: false }">
@@ -164,7 +166,7 @@
                             @endforeach
                         </div>
                         
-                        <a href="{{ $project->url ?? "#" }}" class="sm:text-lg underline hover:no-underline decoration-2 decoration-solid decoration-[#0077C0] underline-offset-8 font-medium text-[#0077C0] hover:border-2 border-[#0077C0] sm:px-4 px-2 py-1 rounded-md hover:text-[#C7EEFF] transition" target="_blank">Live preview</a>
+                        <a href="{{ $project->url ?? "#" }}" class="sm:text-lg text-sm mobile-m:text-base underline hover:no-underline decoration-2 decoration-solid decoration-[#0077C0] underline-offset-8 font-medium text-[#0077C0] hover:border-2 border-[#0077C0] sm:px-4 px-2 py-1 rounded-md hover:text-[#C7EEFF] transition" target="_blank">Live preview</a>
                     </div>
                 </div>
             </div>

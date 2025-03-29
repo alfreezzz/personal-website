@@ -5,9 +5,11 @@
         <span class="font-medium">ideas</span>.
     </x-sub-header>
     <div class="justify-between flex">
-        @if(request()->query('token') === env('ADMIN_ACCESS_TOKEN'))
-            <x-btn-add href="{{ url('admin/blog/create') . '?' . http_build_query(['token' => request()->query('token')]) }}">article</x-btn-add>
-        @endif
+        <div>
+            @if(request()->query('token') === env('ADMIN_ACCESS_TOKEN'))
+                <x-btn-add href="{{ url('admin/blog/create') . '?' . http_build_query(['token' => request()->query('token')]) }}">article</x-btn-add>
+            @endif
+        </div>
         <form action="{{ url('#blog') }}" method="GET" class="flex items-center" id="filterForm">
             <div class="relative" x-data="{ isOpen: false }">
                 <button
