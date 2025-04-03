@@ -137,9 +137,9 @@
             </div>
         </div>
     </div>
-    <div class="others relative flex sm:flex-row flex-col items-center sm:px-8 px-5 sm:gap-5 gap-3 mt-5">
+    <div class="others relative flex sm:flex-row flex-col items-center sm:px-8 px-5 sm:gap-5 gap-3 sm:mt-5 mt-9">
         {{-- Social Media --}}
-        <div class="container w-full border border-[#C7EEFF] sm:aspect-2/1 max-sm:min-h-32 rounded-lg flex flex-col justify-center items-center p-2 relative overflow-hidden">
+        <div class=" w-full border border-[#C7EEFF] sm:aspect-2/1 max-sm:min-h-32 rounded-lg flex flex-col justify-center items-center p-2 relative overflow-hidden">
             <!-- Web Background Grid -->
             <div class="absolute inset-0 bg-[length:40px_40px] bg-[linear-gradient(to_right,rgb(229,231,235)_1px,transparent_1px),linear-gradient(to_bottom,rgb(229,231,235)_1px,transparent_1px)] opacity-20 pointer-events-none z-0"></div>
             
