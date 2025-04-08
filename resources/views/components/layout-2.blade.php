@@ -42,13 +42,18 @@
     
 </head>
 
-<body class="bg-black text-[#C7EEFF]">
+<body class="bg-black text-[#C7EEFF] min-h-screen h-full">
 
-    <x-navigasi-2></x-navigasi>
-
-    {{ $slot }}
-
-    <x-footer></x-footer>
+    <div class="min-h-screen flex flex-col">
+        <x-navigasi-2 />
+        
+        <main class="flex-grow">
+            {{ $slot }}
+        </main>
+    
+        <x-footer />
+    </div>
+    
 </body>
 
 </html>

@@ -191,6 +191,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v12a2 2 0 01-2 2H5z"/>
                 </svg>
                 <span class="lg:text-2xl text-4xl sm:text-lg font-bold text-purple-800 transform transition-transform duration-300 group-hover:scale-110 group-hover:translate-x-0.5" x-text="repos">0</span>
+                <span class="animate-blink border border-purple-800 h-8 sm:h-4 lg:h-6 mt-1.5 sm:mt-0.5 lg:mt-1 transition-transform duration-300 group-hover:scale-110 group-hover:translate-x-0.5"></span>
             </div>            
             <span class="text-sm sm:text-xs lg:text-sm text-gray-600">Total Public Repos</span>
         </div>

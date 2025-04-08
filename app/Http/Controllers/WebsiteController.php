@@ -41,6 +41,11 @@ class WebsiteController extends Controller
         return view('welcome', compact('skills', 'experiences', 'projects', 'projectcategories', 'blogs', 'blogcategories'));
     }
 
+    public function notfound()
+    {
+        return view('not-found', ['title' => '404 Not Found']);
+    }
+
     public function send(Request $request)
     {
         $data = request()->validate(

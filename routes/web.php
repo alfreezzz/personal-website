@@ -10,6 +10,7 @@ use App\Http\Controllers\MessageController;
 
 // Guest & Admin (WebsiteController)
 Route::get('/', [WebsiteController::class, 'index']);
+Route::get('/not-found', [WebsiteController::class, 'notfound']);
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 Route::post('/', [WebsiteController::class, 'send'])->name('welcome.send');
 
@@ -18,7 +19,6 @@ Route::middleware('admin')->group(function () {
     Route::resource('skill', SkillController::class);
     Route::resource('experience', ExperienceController::class);
     Route::resource('portofolio', PortofolioController::class);
-
     Route::get('/admin/messages', [MessageController::class, 'index'])->name('admin.messages.index');
     Route::delete('admin/messages/{id}', [MessageController::class, 'delete'])->name('admin.messages.delete');
 });

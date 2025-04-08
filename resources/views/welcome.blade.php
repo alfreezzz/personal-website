@@ -10,8 +10,6 @@
     
     <x-blog :blogs="$blogs" :blogcategories="$blogcategories"></x-blog>
 
-    {{-- <x-show></x-show> --}}
-
     <x-contact></x-contact>
 
 </x-layout>
