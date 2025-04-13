@@ -7,18 +7,27 @@
     </x-sub-header>
     @if(request()->query('token') === env('ADMIN_ACCESS_TOKEN'))
         <div class="flex justify-end">
-            <x-btn-add href="{{ url('experience/create') . '?' . http_build_query(['token' => request()->query('token')]) }}">experience</x-btn-add>
+            <x-btn-add href="{{ url('experience/create') . '?' . http_build_query(['token' => request()->query('token')]) }}">
+                experience
+            </x-btn-add>
         </div>
     @endif
+
     <div class="timeline-line absolute left-4 sm:left-32 lg:left-44 w-px top-24 sm:top-20 lg:top-32 bottom-9 lg:bottom-10 bg-[#C7EEFF]"></div>
     <div id="timeline-circle" class="absolute sm:w-5 sm:h-5 w-4 h-4 bg-[#0077C0] top-24 sm:top-20 lg:top-32 rounded-full left-4 sm:left-32 lg:left-44" style="transform: translateX(-50%); z-index: 2"></div>
     
     <div id="experiences-container" class="space-y-16 lg:mt-12 mt-8 mb-4">
         @if($experiences->isEmpty())
             <div class="flex flex-col max-w-screen-mobile-m justify-center items-center mx-auto lg:-mt-12 -mt-4">
-                <svg class="w-1/5 h-1/5" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#9ca3af"><path d="M160-120q-33 0-56.5-23.5T80-200v-440q0-33 23.5-56.5T160-720h160v-80q0-33 23.5-56.5T400-880h160q33 0 56.5 23.5T640-800v80h160q33 0 56.5 23.5T880-640v440q0 33-23.5 56.5T800-120H160Zm0-80h640v-440H160v440Zm240-520h160v-80H400v80ZM160-200v-440 440Z"/></svg>
-                <p class="text-center text-gray-400 mb-4 mt-2 font-light sm:text-base text-sm">Experience has not yet been added.</p>
-                <x-cta-btn href="{{ url('experience/create') . '?' . http_build_query(['token' => request()->query('token')]) }}">Add an experience</x-cta-btn>
+                <svg class="w-1/5 h-1/5" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#9ca3af">
+                    <path d="M160-120q-33 0-56.5-23.5T80-200v-440q0-33 23.5-56.5T160-720h160v-80q0-33 23.5-56.5T400-880h160q33 0 56.5 23.5T640-800v80h160q33 0 56.5 23.5T880-640v440q0 33-23.5 56.5T800-120H160Zm0-80h640v-440H160v440Zm240-520h160v-80H400v80ZM160-200v-440 440Z"/>
+                </svg>
+                <p class="text-center text-gray-400 mb-4 mt-2 font-light sm:text-base text-sm">
+                    Experience has not yet been added.
+                </p>
+                <x-cta-btn href="{{ url('experience/create') . '?' . http_build_query(['token' => request()->query('token')]) }}">
+                    Add an experience
+                </x-cta-btn>
             </div>
         @else
             @foreach($experiences as $experience)

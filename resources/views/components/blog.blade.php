@@ -7,7 +7,9 @@
     <div class="justify-between flex">
         <div>
             @if(request()->query('token') === env('ADMIN_ACCESS_TOKEN'))
-                <x-btn-add href="{{ url('admin/blog/create') . '?' . http_build_query(['token' => request()->query('token')]) }}">article</x-btn-add>
+                <x-btn-add href="{{ url('admin/blog/create') . '?' . http_build_query(['token' => request()->query('token')]) }}">
+                    article
+                </x-btn-add>
             @endif
         </div>
         <form action="{{ url('#blog') }}" method="GET" class="flex items-center" id="filterForm">
@@ -69,33 +71,51 @@
     </div>   
     @if($blogs->isEmpty())
         <div class="flex flex-col max-w-screen-mobile-m justify-center items-center mx-auto max-sm:mt-5">
-            <svg class="w-1/5 h-1/5" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#9ca3af"><path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
-            <p class="text-center text-gray-400 mb-4 mt-2 font-light sm:text-base text-sm">Article has not yet been added.</p>
-            <x-cta-btn href="{{ url('admin/blog/create') . '?' . http_build_query(['token' => request()->query('token')]) }}">Write an article</x-cta-btn>
+            <svg class="w-1/5 h-1/5" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#9ca3af">
+                <path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/>
+            </svg>
+            <p class="text-center text-gray-400 mb-4 mt-2 font-light sm:text-base text-sm">
+                Article has not yet been added.
+            </p>
+            <x-cta-btn href="{{ url('admin/blog/create') . '?' . http_build_query(['token' => request()->query('token')]) }}">
+                Write an article
+            </x-cta-btn>
         </div>
     @else
-    <div class="grid lg:grid-cols-3 sm:grid-cols-2 sm:gap-5 gap-3 max-sm:mt-5 pt-5 mx-auto">
-
-        @foreach ($blogs as $blog)
-        <div class="card flex flex-col sm:border border-[#C7EEFF] sm:p-4 text-left rounded-md lg:pb-12 pb-8">
-            <div class="w-full max-sm:hidden relative mb-4 overflow-hidden rounded sm:h-[200px] h-[250px]">
-                <a href="{{ url('blog/' . $blog->slug) . '?' . http_build_query(['token' => request()->query('token')]) }}">
-                    <img src="{{ Storage::exists('public/' . $blog->img) ? asset('storage/' . $blog->img) : 'https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=' }}" 
-                        alt="Article" 
-                        class="w-full h-full object-cover hover:border-2 border-[#0077C0] transition duration-200">
-                </a>
-            </div>
-            <div class="text-left flex-grow text-sm leading-normal">
-                <a href="{{ url('blog/' . $blog->slug) . '?' . http_build_query(['token' => request()->query('token')]) }}"><h3 class="sm:text-lg text-base font-semibold tracking-wider hover:underline leading-tight mb-2">{{$blog->judul_artikel}}</h3></a>
-                <div class="mb-4">
-                    <p class="font-extralight text-sm">{{ $blog->created_at->diffForHumans() }} • <a href="{{ url()->current() . '?' . http_build_query(array_merge(request()->query(), ['jenis_artikel' => $blog->jenis_artikel])) }}#blog" class="font-medium hover:text-gray-400">{{ $blog->jenis_artikel }}</a></p>
+        <div class="grid lg:grid-cols-3 sm:grid-cols-2 sm:gap-5 gap-3 max-sm:mt-5 pt-5 mx-auto">
+            @foreach ($blogs as $blog)
+            <div class="card flex flex-col sm:border border-[#C7EEFF] sm:p-4 text-left rounded-md lg:pb-12 pb-8">
+                <div class="w-full max-sm:hidden relative mb-4 overflow-hidden rounded sm:h-[200px] h-[250px]">
+                    <a href="{{ url('blog/' . $blog->slug) . '?' . http_build_query(['token' => request()->query('token')]) }}">
+                        <img src="{{ Storage::exists('public/' . $blog->img) ? asset('storage/' . $blog->img) : 'https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=' }}" 
+                            alt="Article" 
+                            class="w-full h-full object-cover hover:border-2 border-[#0077C0] transition duration-200">
+                    </a>
                 </div>
-                <a href="{{ url('blog/' . $blog->slug) . '?' . http_build_query(['token' => request()->query('token')]) }}"><p class="hover:underline text-sm leading-relaxed">{!! Str::limit(strip_tags($blog->isi_artikel), 150) !!}</p></a>
+                <div class="text-left flex-grow text-sm leading-normal">
+                    <a href="{{ url('blog/' . $blog->slug) . '?' . http_build_query(['token' => request()->query('token')]) }}">
+                        <h3 class="sm:text-lg text-base font-semibold tracking-wider hover:underline leading-tight mb-2">
+                            {{$blog->judul_artikel}}
+                        </h3>
+                    </a>
+                    <div class="mb-4">
+                        <p class="font-extralight text-sm">
+                            {{ $blog->created_at->diffForHumans() }} • 
+                            <a href="{{ url()->current() . '?' . http_build_query(array_merge(request()->query(), ['jenis_artikel' => $blog->jenis_artikel])) }}#blog" 
+                            class="font-medium hover:text-gray-400">
+                                {{ $blog->jenis_artikel }}
+                            </a>
+                        </p>
+                    </div>
+                    <a href="{{ url('blog/' . $blog->slug) . '?' . http_build_query(['token' => request()->query('token')]) }}">
+                        <p class="hover:underline text-sm leading-relaxed">
+                            {!! Str::limit(strip_tags($blog->isi_artikel), 150) !!}
+                        </p>
+                    </a>
+                </div>
+                <hr class="sm:hidden mt-5">
             </div>
-            <hr class="sm:hidden mt-5">
+            @endforeach
         </div>
-        @endforeach
-
-    </div>
     @endif
 </div>
